@@ -1,4 +1,4 @@
 Projects:
-• Personal Portfolio Website – Built using HTML, CSS, and JavaScript.
-• Student Management System – Developed using Python and MySQL.
-• Network Security Study – Analysis of firewalls, IDS, and network attacks.
+Personal Portfolio Website – Built using HTML, CSS, and JavaScript.
+Student Management System – Developed using Python and MySQL.
+Network Security Study – Analysis of firewalls, IDS, and network attacks.

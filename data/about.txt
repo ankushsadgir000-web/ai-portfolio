@@ -1,5 +1,8 @@
+
 About Me:
-My name is Ankush.
-I am a second-year Computer Engineering student.
-This section describes information about myself.
-I am interested in software development, artificial intelligence, and networking.
+My full name is Ankush sadgir.
+I am a third-year Computer Engineering student.
+I have strong fundamentals in programming, databases, computer networks, and operating systems.
+I am interested in software development, AI, and problem-solving.
+I have built multiple academic and practical projects using Python, web technologies, and networking concepts.
+I am actively looking for internship opportunities to gain real-world industry experience.
