@@ -35,37 +35,27 @@ def keyword_match(question):
     if "education" in q or "study" in q:
         return "education"
     return None
-
-
 def ask_ai(question):
-    key = keyword_match(question)
+    q = question.lower()
 
-    # If keyword found, return matching sentence
-    if key:
-        for s in sentences:
-            if key in s:
-                return s
+    # Handle projects clearly
+    if "project" in q:
+        project_lines = [s for s in sentences if "portfolio" in s or "system" in s or "security" in s]
+        return "Here are my projects:\n" + "\n".join(project_lines)
 
-    # Else fallback to TF-IDF
-    question_vector = vectorizer.transform([question.lower()])
+    # Handle skills
+    if "skill" in q:
+        skill_lines = [s for s in sentences if "programming" in s or "web" in s or "tools" in s]
+        return "My skills include:\n" + "\n".join(skill_lines)
+
+    # Handle education
+    if "education" in q or "study" in q:
+        edu_lines = [s for s in sentences if "engineering" in s or "education" in s]
+        return "Education details:\n" + "\n".join(edu_lines)
+
+    # Fallback to similarity
+    question_vector = vectorizer.transform([q])
     similarities = cosine_similarity(question_vector, tfidf_matrix)
-
     best_index = similarities.argmax()
-    best_score = similarities[0][best_index]
-
-    if best_score < 0.05:
-        return "Sorry, I don't have information related to that."
-
     return sentences[best_index]
 
-
-if __name__ == "__main__":
-    print("AI Assistant: Ask about Ankush (type 'exit' to quit)\n")
-
-    while True:
-        q = input("You: ")
-        if q.lower() == "exit":
-            print("AI Assistant: Goodbye!")
-            break
-
-        print("\nAI Assistant:", ask_ai(q), "\n")
