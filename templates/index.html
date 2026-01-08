@@ -110,7 +110,10 @@ function askAI() {
     if (q.length < 1) return;
 
     const chat = document.getElementById("chat");
-    chat.innerHTML += `<div class="msg user">${q}</div>`;
+    const formattedAnswer = data.answer.replace(/\n/g, "<br>");
+    chat.innerHTML += `<div class="msg ai">${formattedAnswer}</div>`;
+
+  
     input.value = "";
     chat.scrollTop = chat.scrollHeight;
 
