@@ -1,0 +1,5 @@
+About Me:
+My name is Ankush.
+I am a second-year Computer Engineering student.
+This section describes information about myself.
+I am interested in software development, artificial intelligence, and networking.

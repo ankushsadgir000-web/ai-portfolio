@@ -1,0 +1,9 @@
+Projects:
+Project 1: Personal Portfolio Website
+Developed a responsive portfolio website using HTML, CSS, and JavaScript to showcase projects.
+
+Project 2: Student Management System
+Created a student management system using Python and MySQL.
+
+Project 3: Network Security Study
+Studied network attacks and security mechanisms such as firewalls and IDS.

@@ -1,0 +1,5 @@
+Skills:
+Programming Languages: C, C++, Python, Java.
+Web Technologies: HTML, CSS, JavaScript.
+Core Subjects: Operating Systems, Computer Networks, DBMS.
+Tools: Git, GitHub, VS Code.

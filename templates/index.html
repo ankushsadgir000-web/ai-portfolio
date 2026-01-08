@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ankush | AI Portfolio</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+        #chat { background: white; padding: 15px; width: 400px; }
+        input { width: 75%; padding: 8px; }
+        button { padding: 8px; }
+        .msg { margin: 10px 0; }
+        .user { font-weight: bold; }
+        .ai { color: blue; }
+    </style>
+</head>
+<body>
+
+<h2>Ankush – AI Portfolio Assistant</h2>
+
+<div id="chat"></div>
+
+<input id="question" placeholder="Ask about me..." />
+<button onclick="askAI()">Ask</button>
+
+<script>
+function askAI() {
+    const input = document.getElementById("question");
+    const q = input.value;
+
+    if (q.trim() === "") return;
+
+    document.getElementById("chat").innerHTML += 
+        `<div class="msg user">You: ${q}</div>`;
+
+    input.value = "";   // 👈 clears the input box
+
+    fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({question: q})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("chat").innerHTML += 
+            `<div class="msg ai">AI: ${data.answer}</div>`;
+    });
+}
+</script>
+
+
+</body>
+</html>
