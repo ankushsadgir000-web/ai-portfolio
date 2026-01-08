@@ -38,41 +38,32 @@ def keyword_match(question):
 def ask_ai(question):
     q = question.lower().strip()
 
-    # Greetings
-    if q in ["hi", "hello", "hey"]:
-        return "Hello! 👋 You can ask me about my skills, projects, or education."
+    # Greeting
+    if q.startswith(("hi", "hello", "hey")):
+        return "Hello! 👋 I’m Ankush’s AI portfolio assistant. You can ask me about my skills, projects, or education."
 
-    if "thank" in q:
-        return "You're welcome! 😊 Feel free to ask more."
+    # About Me
+    if "about" in q or "yourself" in q or "who are you" in q:
+        about_lines = [s for s in sentences if "about me" in s or "my full name" in s or "engineering" in s]
+        return "About me:\n" + "\n".join(about_lines)
 
-    # Projects
-    if "project" in q:
-        project_lines = [
-            s for s in sentences
-            if "portfolio" in s or "system" in s or "security" in s
-        ]
-        return "Here are my projects:\n" + "\n".join(project_lines)
-
-    # Skills
+    # Skills (FORCED)
     if "skill" in q:
-        skill_lines = [
-            s for s in sentences
-            if "programming" in s or "web" in s or "tools" in s
-        ]
-        return "My skills include:\n" + "\n".join(skill_lines)
+        skill_lines = [s for s in sentences if "skills" in s or "programming" in s or "languages" in s]
+        return "My skills:\n" + "\n".join(skill_lines)
+
+    # Projects (FORCED)
+    if "project" in q:
+        project_lines = [s for s in sentences if "project" in s or "portfolio" in s or "system" in s]
+        return "Here are my projects:\n" + "\n".join(project_lines)
 
     # Education
     if "education" in q or "study" in q:
-        edu_lines = [
-            s for s in sentences
-            if "engineering" in s or "education" in s
-        ]
+        edu_lines = [s for s in sentences if "engineering" in s or "student" in s]
         return "Education details:\n" + "\n".join(edu_lines)
 
-    # Fallback (TF-IDF)
+    # Fallback
     question_vector = vectorizer.transform([q])
     similarities = cosine_similarity(question_vector, tfidf_matrix)
     best_index = similarities.argmax()
-
-    return "Here’s what I found:\n" + sentences[best_index]
-
+    return sentences[best_index]
