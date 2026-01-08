@@ -2,36 +2,118 @@
 <html>
 <head>
     <title>Ankush | AI Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        body { font-family: Arial; background: #f4f4f4; padding: 20px; }
-        #chat { background: white; padding: 15px; width: 400px; }
-        input { width: 75%; padding: 8px; }
-        button { padding: 8px; }
-        .msg { margin: 10px 0; }
-        .user { font-weight: bold; }
-        .ai { color: blue; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 95%;
+            max-width: 420px;
+            height: 90vh;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: #2a5298;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 14px 14px 0 0;
+        }
+
+        #chat {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            margin: 10px 0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .user {
+            background: #e3f2fd;
+            margin-left: auto;
+        }
+
+        .ai {
+            background: #f1f1f1;
+        }
+
+        .input-box {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        button {
+            margin-left: 8px;
+            padding: 10px 16px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e3c72;
+        }
     </style>
 </head>
+
 <body>
 
-<h2>Ankush – AI Portfolio Assistant</h2>
+<div class="container">
+    <div class="header">
+        <h3>Ankush – AI Portfolio Assistant</h3>
+        <small>Ask about my skills, projects, or education</small>
+    </div>
 
-<div id="chat"></div>
+    <div id="chat"></div>
 
-<input id="question" placeholder="Ask about me..." />
-<button onclick="askAI()">Ask</button>
+    <div class="input-box">
+        <input id="question" placeholder="Type your question..." />
+        <button onclick="askAI()">Send</button>
+    </div>
+</div>
 
 <script>
 function askAI() {
     const input = document.getElementById("question");
-    const q = input.value;
+    const q = input.value.trim();
+    if (q.length < 2) return;
 
-    if (q.trim() === "") return;
-
-    document.getElementById("chat").innerHTML += 
-        `<div class="msg user">You: ${q}</div>`;
-
-    input.value = "";   // 👈 clears the input box
+    const chat = document.getElementById("chat");
+    chat.innerHTML += `<div class="msg user">${q}</div>`;
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
 
     fetch("/ask", {
         method: "POST",
@@ -40,12 +122,11 @@ function askAI() {
     })
     .then(res => res.json())
     .then(data => {
-        document.getElementById("chat").innerHTML += 
-            `<div class="msg ai">AI: ${data.answer}</div>`;
+        chat.innerHTML += `<div class="msg ai">${data.answer}</div>`;
+        chat.scrollTop = chat.scrollHeight;
     });
 }
 </script>
-
 
 </body>
 </html>
