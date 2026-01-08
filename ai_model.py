@@ -35,35 +35,71 @@ def keyword_match(question):
     if "education" in q or "study" in q:
         return "education"
     return None
+
 def ask_ai(question):
     q = question.lower().strip()
 
     # Greeting
     if q.startswith(("hi", "hello", "hey")):
-        return "Hello! 👋 I’m Ankush’s AI portfolio assistant. You can ask me about my skills, projects, or education."
+        return (
+            "👋 Hello!\n\n"
+            "I’m Ankush’s AI Portfolio Assistant.\n"
+            "You can ask me about:\n"
+            "• About Me\n"
+            "• Skills\n"
+            "• Projects\n"
+            "• Education"
+        )
 
     # About Me
     if "about" in q or "yourself" in q or "who are you" in q:
-        about_lines = [s for s in sentences if "about me" in s or "my full name" in s or "engineering" in s]
-        return "About me:\n" + "\n".join(about_lines)
+        return (
+            "📌 **About Me**\n\n"
+            "• Full Name: Ankush Vinod Shardul\n"
+            "• Education: Second-year Computer Engineering student\n"
+            "• Interests: Software Development, AI, Problem Solving\n"
+            "• Strengths: Programming, Databases, Networking, OS\n"
+            "• Goal: Seeking internship opportunities for industry exposure"
+        )
 
-    # Skills (FORCED)
+    # Skills
     if "skill" in q:
-        skill_lines = [s for s in sentences if "skills" in s or "programming" in s or "languages" in s]
-        return "My skills:\n" + "\n".join(skill_lines)
+        return (
+            "🛠 **Skills**\n\n"
+            "• Programming: Python, C, C++, Java\n"
+            "• Web: HTML, CSS, JavaScript\n"
+            "• Databases: MySQL, MongoDB (Basics)\n"
+            "• Core Subjects: DSA, OS, CN, DBMS\n"
+            "• Tools: Git, VS Code"
+        )
 
-    # Projects (FORCED)
+    # Projects
     if "project" in q:
-        project_lines = [s for s in sentences if "project" in s or "portfolio" in s or "system" in s]
-        return "Here are my projects:\n" + "\n".join(project_lines)
+        return (
+            "📂 **Projects**\n\n"
+            "1️⃣ Personal Portfolio Website\n"
+            "   – HTML, CSS, JavaScript\n\n"
+            "2️⃣ Student Management System\n"
+            "   – Python, MySQL\n\n"
+            "3️⃣ Network Security Study\n"
+            "   – Firewalls, IDS, Attack Analysis"
+        )
 
     # Education
     if "education" in q or "study" in q:
-        edu_lines = [s for s in sentences if "engineering" in s or "student" in s]
-        return "Education details:\n" + "\n".join(edu_lines)
+        return (
+            "🎓 **Education**\n\n"
+            "• Degree: Bachelor of Engineering (Computer Engineering)\n"
+            "• Year: Second Year\n"
+            "• Focus Areas: Software, Networks, Databases, OS"
+        )
 
     # Fallback
-    question_vector = vectorizer.transform([q])
-    similarities = cosine_similarity(question_vector, tfidf_matrix)
-    best_index = similarities.argmax()
-    return sentences[best_index]
+    return (
+        "🤖 I couldn’t fully understand that.\n\n"
+        "Try asking about:\n"
+        "• Skills\n"
+        "• Projects\n"
+        "• Education\n"
+        "• About Me"
+    )
