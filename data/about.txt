@@ -1,8 +1,7 @@
-
-About Me:
-My full name is Ankush sadgir.
-I am a third-year Computer Engineering student.
-I have strong fundamentals in programming, databases, computer networks, and operating systems.
-I am interested in software development, AI, and problem-solving.
-I have built multiple academic and practical projects using Python, web technologies, and networking concepts.
-I am actively looking for internship opportunities to gain real-world industry experience.
+ABOUT_ME
+Full Name: Ankush Sadgir
+Current Year: Third Year
+Degree: Bachelor of Engineering in Computer Engineering
+Interests: Software Development, AI, Problem Solving
+Skills Focus: Programming, Databases, Computer Networks, Operating Systems
+Career Goal: Seeking internship opportunities to gain real-world industry experience
