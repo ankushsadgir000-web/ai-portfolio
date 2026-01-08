@@ -114,6 +114,12 @@ function askAI() {
     chat.innerHTML += `<div class="msg user">${q}</div>`;
     input.value = "";
     chat.scrollTop = chat.scrollHeight;
+    document.getElementById("question").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        askAI();
+    }
+});
+
 
     fetch("/ask", {
         method: "POST",
