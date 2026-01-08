@@ -36,26 +36,43 @@ def keyword_match(question):
         return "education"
     return None
 def ask_ai(question):
-    q = question.lower()
+    q = question.lower().strip()
 
-    # Handle projects clearly
+    # Greetings
+    if q in ["hi", "hello", "hey"]:
+        return "Hello! 👋 You can ask me about my skills, projects, or education."
+
+    if "thank" in q:
+        return "You're welcome! 😊 Feel free to ask more."
+
+    # Projects
     if "project" in q:
-        project_lines = [s for s in sentences if "portfolio" in s or "system" in s or "security" in s]
+        project_lines = [
+            s for s in sentences
+            if "portfolio" in s or "system" in s or "security" in s
+        ]
         return "Here are my projects:\n" + "\n".join(project_lines)
 
-    # Handle skills
+    # Skills
     if "skill" in q:
-        skill_lines = [s for s in sentences if "programming" in s or "web" in s or "tools" in s]
+        skill_lines = [
+            s for s in sentences
+            if "programming" in s or "web" in s or "tools" in s
+        ]
         return "My skills include:\n" + "\n".join(skill_lines)
 
-    # Handle education
+    # Education
     if "education" in q or "study" in q:
-        edu_lines = [s for s in sentences if "engineering" in s or "education" in s]
+        edu_lines = [
+            s for s in sentences
+            if "engineering" in s or "education" in s
+        ]
         return "Education details:\n" + "\n".join(edu_lines)
 
-    # Fallback to similarity
+    # Fallback (TF-IDF)
     question_vector = vectorizer.transform([q])
     similarities = cosine_similarity(question_vector, tfidf_matrix)
     best_index = similarities.argmax()
-    return sentences[best_index]
+
+    return "Here’s what I found:\n" + sentences[best_index]
 
